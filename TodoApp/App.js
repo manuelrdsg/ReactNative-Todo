@@ -21,6 +21,10 @@ export default class ToDoApp extends Component {
     };
   }
 
+  componentDidMount() {
+    this._updateTodos();
+  }
+
   async _updateTodos() {
     let response = await AsyncStorage.getItem('Tasks');
     let tasks = await JSON.parse(response) || [];
