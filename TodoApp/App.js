@@ -96,7 +96,7 @@ export default class ToDoApp extends Component {
             <View>
               <View style={styles.list_row}>
                 <Text style={styles.item}>{index + 1}.- {item.text}</Text>
-                <Icon name="times" style={styles.button_del} size={30} color="#900" onPress={() => this.deleteToDo(index)} />
+                <Icon name="times-circle" style={styles.button_del} size={30} color="#900" onPress={() => this.deleteToDo(index)} />
               </View>
               <View style={styles.line}></View>
             </View>

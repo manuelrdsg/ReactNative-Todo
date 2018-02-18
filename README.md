@@ -1,4 +1,8 @@
-# ReactNative-Todo
+# ReactNative TodoApp
+
+This project is a simple TodoApp developed usign React-Native.
+
+!()[]
 
 ## Installation & Use
 
@@ -9,6 +13,10 @@ cd TodoApp
 npm install
 yarn run ios
 ```
+
+## Live Demo
+
+Live demo of this project is available through the following link. [Click Here!](https://snack.expo.io/rJPZqtPwM)
 
 ## Disclaimer
 
