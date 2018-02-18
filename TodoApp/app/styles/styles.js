@@ -8,19 +8,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 22
   },
-  buttonContainer: {
-    margin: 20
-  },
   text_imput: {
     height: 40,
     width: '100%',
     borderColor: "blue",
     borderWidth: 1,
     fontSize:25
-  },
-  pizza: {
-    padding:10,
-    fontSize: 42
   },
   list_row: {
     flexDirection: "row",

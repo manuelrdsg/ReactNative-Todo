@@ -7,14 +7,13 @@ import {
   StyleSheet,
   Button,
   FlatList,
-  Keyboard,
   KeyboardAvoidingView 
 } from 'react-native';
 // import {
 //   Button,
 // } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
-import styles from './app/styles/styles';
+//import Icon from 'react-native-vector-icons/Ionicons';
+//import styles from './app/styles/styles';
 
 export default class ToDoApp extends Component {
   constructor(props) {
@@ -95,6 +94,46 @@ export default class ToDoApp extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    flex: 1,
+    paddingTop: 22
+  },
+  buttonContainer: {
+    margin: 20
+  },
+  text_imput: {
+    height: 40,
+    width: '100%',
+    borderColor: "blue",
+    borderWidth: 1,
+    fontSize:25
+  },
+  pizza: {
+    padding:10,
+    fontSize: 42
+  },
+  list_row: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+  head: {
+    paddingTop: 10,
+    textAlign: 'center',
+    fontSize: 45
+  },
+  line: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  }
+});
 
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('ToDoApp', () => ToDoApp);
