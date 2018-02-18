@@ -6,14 +6,14 @@ import {
   View,
   StyleSheet,
   Button,
-  FlatList 
+  FlatList,
+  Keyboard,
+  KeyboardAvoidingView 
 } from 'react-native';
 // import {
 //   Button,
 // } from 'react-native-elements';
-// import {
-//   Icon
-// } from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './app/styles/styles';
 
 export default class ToDoApp extends Component {
@@ -25,18 +25,7 @@ export default class ToDoApp extends Component {
     };
   }
 
-  changeTort = () => {
-    console.log("El evento funciona");
-    var tex = this.state.text
-    //this.setState({text: tex.split(' ').map((word) => word && '🐢').join(' ')});
-  };
-
   addToDo = () => {
-    console.log("Añadiendo tarea");
-    // var prevState = this.state.tasks;
-    // var text = this.state.text;
-    // prevState.push(text);
-    // //this.setState({ tasks: prevState});
 
     console.log(this.state.tasks);
     let notEmpty = this.state.text.trim().length > 0;
@@ -82,6 +71,10 @@ export default class ToDoApp extends Component {
           <Button title="X" onPress={() => this.deleteToDo(index)} />
           </View>}
         />
+        <KeyboardAvoidingView
+          //style={styles.container}
+          behavior='padding' 
+        >
         <TextInput
           style={styles.text_imput}
           ref={input => { this.textInput = input }}
@@ -91,6 +84,7 @@ export default class ToDoApp extends Component {
             () => this.addToDo()
           }
         />
+        </KeyboardAvoidingView>
         {/* <Button
           //style = {styles.add_button}
           icon={{name: 'add-circle', size: 32}}

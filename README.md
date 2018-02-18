@@ -7,7 +7,7 @@ Clone this repo and run the following commands
 ```
 cd TodoApp
 npm install
-react-native run-ios
+yarn run ios
 ```
 
 ## Disclaimer

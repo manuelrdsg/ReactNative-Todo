@@ -1,4 +1,5 @@
 {
-  "name": "TodoApp",
-  "displayName": "TodoApp"
+  "expo": {
+    "sdkVersion": "25.0.0"
+  }
 }
