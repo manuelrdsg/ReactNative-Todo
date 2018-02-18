@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { 
-  AppRegistry, 
-  Text, 
-  TextInput, 
+import {
+  AppRegistry,
+  Text,
+  //TextInput,
   View,
   StyleSheet,
-  Button,
+  //Button,
   FlatList,
-  KeyboardAvoidingView 
+  KeyboardAvoidingView
 } from 'react-native';
-// import {
-//   Button,
-// } from 'react-native-elements';
-//import Icon from 'react-native-vector-icons/Ionicons';
-//import styles from './app/styles/styles';
+import { Button, FormInput, Header } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from './app/styles/styles';
 
 export default class ToDoApp extends Component {
   constructor(props) {
@@ -35,12 +33,12 @@ export default class ToDoApp extends Component {
           let { text, tasks } = prevState;
           return {
             text: "",
-            tasks: tasks.concat({key: Math.random(), text: text })
+            tasks: tasks.concat({ key: Math.random(), text: text })
           };
         }
       );
     }
-    this.textInput.clear();
+    this.input.clearText();
   };
 
   deleteToDo = key => {
@@ -60,80 +58,50 @@ export default class ToDoApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.head}>Todo App</Text>
-        <View style={styles.line} />
+        <Header centerComponent={{ text: 'TodoApp', style: { color: '#fff', fontSize: 18 } }} />
+        {/* <Text style={styles.head}>Todo App</Text>
+        <View style={styles.line} /> */}
         <FlatList
           data={this.state.tasks}
-          renderItem={({ item, index }) => 
-          <View style={styles.list_row}>
-          <Text style={styles.item}>{index +1}.- {item.text}</Text>
-          <Button title="X" onPress={() => this.deleteToDo(index)} />
-          </View>}
-        />
-        <KeyboardAvoidingView
-          //style={styles.container}
-          behavior='padding' 
-        >
-        <TextInput
-          style={styles.text_imput}
-          ref={input => { this.textInput = input }}
-          placeholder="Enter new To-Do"
-          onChangeText={(text) => this.setState({ text })}
-          onSubmitEditing={
-            () => this.addToDo()
+          renderItem={({ item, index }) =>
+            <View>
+              <View style={styles.list_row}>
+                <Text style={styles.item}>{index + 1}.- {item.text}</Text>
+                <Icon name="times" style={styles.button_del} size={30} color="#900" onPress={() => this.deleteToDo(index)} />
+              </View>
+              <View style={styles.line}></View>
+            </View>
           }
         />
+        <KeyboardAvoidingView
+          behavior='padding'
+          style={styles.row}
+        >
+          {/* <TextInput
+            style={styles.text_imput}
+            ref={input => { this.textInput = input }}
+            placeholder="Enter new task"
+            onChangeText={(text) => this.setState({ text })}
+            onSubmitEditing={
+              () => this.addToDo()
+            }
+          /> */}
+          <FormInput
+            ref={input => this.input = input}
+            containerStyle={styles.text_imput}
+            inputStyle={{ fontSize: 25 }}
+            onChangeText={(text) => this.setState({ text })}
+            onSubmitEditing={
+              () => this.addToDo()
+            }
+            placeholder='Enter new task…'
+          />
+          <Icon name="paper-plane" size={30} color="lightblue" onPress={() => this.addToDo()} />
         </KeyboardAvoidingView>
-        {/* <Button
-          //style = {styles.add_button}
-          icon={{name: 'add-circle', size: 32}}
-          color='blue'
-          onPress={this.changeTort()}
-        /> */}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    flex: 1,
-    paddingTop: 22
-  },
-  buttonContainer: {
-    margin: 20
-  },
-  text_imput: {
-    height: 40,
-    width: '100%',
-    borderColor: "blue",
-    borderWidth: 1,
-    fontSize:25
-  },
-  pizza: {
-    padding:10,
-    fontSize: 42
-  },
-  list_row: {
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  head: {
-    paddingTop: 10,
-    textAlign: 'center',
-    fontSize: 45
-  },
-  line: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-  }
-});
 
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('ToDoApp', () => ToDoApp);
