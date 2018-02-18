@@ -47,7 +47,7 @@ export default class ToDoApp extends Component {
           let { text, tasks } = prevState;
           return {
             text: "",
-            tasks: tasks.concat({key: tasks.length, text: text })
+            tasks: tasks.concat({key: Math.random(), text: text })
           };
         }
       );
@@ -72,7 +72,7 @@ export default class ToDoApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.head}>ToDo App</Text>
+        <Text style={styles.head}>Todo App</Text>
         <View style={styles.line} />
         <FlatList
           data={this.state.tasks}
