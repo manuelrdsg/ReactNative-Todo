@@ -16,7 +16,7 @@ yarn run ios
 
 ## Live Demo
 
-Live demo of this project is available through the following link. [Click Here!](https://snack.expo.io/rJPZqtPwM)
+Live demo of this project is available through the following link. [Click Here!](https://snack.expo.io/HkJ1XoOwG)
 
 ## Disclaimer
 
