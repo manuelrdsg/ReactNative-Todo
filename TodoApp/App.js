@@ -17,15 +17,39 @@ export default class ToDoApp extends Component {
     super(props);
     this.state = {
       tasks: [],
-      text: ''
+      text: '',
+      addTimes: [],
+      deleteTimes: [],
+      updateTimes: []
     };
   }
 
   componentDidMount() {
+    this._wipeTodos();
+    this._loadMockData("00");
     this._updateTodos();
   }
 
+  _loadMockData(file) {
+
+    var jsonfile;
+
+    if(file === "100")
+      jsonfile = require('./db/MOCK_DATA_100.json')
+    else if(file === "500")
+      jsonfile = require('./db/MOCK_DATA_500.json')
+    else if(file === "1000")
+      jsonfile = require('./db/MOCK_DATA_1000.json')
+    else
+      return;
+  
+    this._saveTodos(jsonfile);
+    
+}
+
   async _updateTodos() {
+    t1 = performance.now();
+
     let response = await AsyncStorage.getItem('Tasks');
     let tasks = await JSON.parse(response) || [];
 
@@ -33,7 +57,32 @@ export default class ToDoApp extends Component {
       tasks
     });
 
+    t2 = performance.now();
+    this.state.updateTimes.push(t2-t1);
+
+    console.log("updateTimes: " + this.state.updateTimes)
+    console.log("addTimes: " + this.state.addTimes)
+    console.log("deleteTimes: " + this.state.deleteTimes)
+
+    //this.saveCSV(this.state.updateTimes, "updateTimes")
   };
+
+  // saveCSV(data, name) {
+
+  //   csvString = data.valueOf();
+
+  //   var a         = React.createElement('a');
+  //   a.href        = 'data:attachment/csv,' +  encodeURIComponent(csvString);
+  //   a.target      = '_blank';
+  //   a.download    = name + '.csv';
+
+  //   document.body.appendChild(a);
+  //   a.click();
+  // }
+
+  async _wipeTodos() {
+    await AsyncStorage.clear();
+  }
 
   async _saveTodos(tasks) {
     await AsyncStorage.setItem('Tasks', JSON.stringify(tasks));
@@ -54,27 +103,37 @@ export default class ToDoApp extends Component {
   }
 
   addToDo() {
+    t1 = performance.now();
 
     let notEmpty = this.state.text.trim().length > 0;
 
     if (notEmpty) {
 
-      const tasks = this.state.tasks.concat({ key: Math.random(), text: this.state.text });
+      const tasks = this.state.tasks.concat({ key: String(Math.random()), text: this.state.text });
       this._saveTodos(tasks);
       this._updateTodos();
     }
 
+    setTimeout(() => this.flatlist.scrollToEnd(), 200)
     this.changeTextInput("");
+
+    t2 = performance.now();
+    this.state.addTimes.push(t2-t1);
   };
 
   deleteToDo(index) {
+    t1 = performance.now();
+
     var array = this.state.tasks;
     array.splice(index, 1);
     this.setState({ tasks: array })
 
     this._saveTodos(this.state.tasks);
     this._updateTodos();
+    console.timeEnd('deleteTodo');
 
+    t2 = performance.now();
+    this.state.deleteTimes.push(t2-t1);
   };
 
   changeTextInput(text) {
@@ -91,11 +150,12 @@ export default class ToDoApp extends Component {
         {/* <Icon name="paper-plane" size={30} color="black" onPress={() => this._debugTodos()} />
         <Icon name="paper-plane" size={30} color="red" onPress={() => this._debugTodosState()} /> */}
         <FlatList
+          ref={flatlist => this.flatlist = flatlist}
           data={this.state.tasks}
           renderItem={({ item, index }) =>
             <View>
               <View style={styles.list_row}>
-                <Text style={styles.item}>{index + 1}.- {item.text}</Text>
+                <Text style={styles.item}>{String(index + 1)}.- {item.text}</Text>
                 <Icon name="times-circle" style={styles.button_del} size={30} color="#900" onPress={() => this.deleteToDo(index)} />
               </View>
               <View style={styles.line}></View>
