@@ -1,6 +1,6 @@
 # ReactNative TodoApp
 
-This project is a simple TodoApp developed using React-Native.
+This project is a benchmark TodoApp developed using React-Native.
 
 <img src="https://github.com/manuelrdsg/ReactNative-Todo/blob/master/images/image1.png" width="200" height="400" />
 
