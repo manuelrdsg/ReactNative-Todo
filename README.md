@@ -11,7 +11,7 @@ Clone this repo and run the following commands
 ```
 cd TodoApp
 npm install
-yarn run ios
+react-native run-ios
 ```
 
 ## Live Demo
@@ -20,4 +20,4 @@ Live demo of this project is available through the following link. [Click Here!]
 
 ## Disclaimer
 
-This project is not finished and I'm quite noob in ReactNative. Please, do not hesitate to open a pull request if you find a bug or believe that the code can be improved in some way. Thanks!
+This project is not finished. Please, do not hesitate to open a pull request if you find a bug or believe that the code can be improved in some way. Thanks!
