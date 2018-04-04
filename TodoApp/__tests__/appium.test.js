@@ -10,31 +10,29 @@ beforeAll(async () => {
 })
 
 test('Adding Task', async () => {
-    await (new wd.TouchAction(driver))
-    .tap({x: 183, y: 622})
-    .perform()
-  await (new wd.TouchAction(driver))
-    .tap({x: 168, y: 476})
-    .perform()
-  await (new wd.TouchAction(driver))
-    .tap({x: 90, y: 480})
-    .perform()
-  await (new wd.TouchAction(driver))
-    .tap({x: 55, y: 530})
-    .perform()
-  await (new wd.TouchAction(driver))
-    .tap({x: 165, y: 473})
-    .perform()
-  await (new wd.TouchAction(driver))
-    .tap({x: 328, y: 641})
-    .perform()
+  let el5 = await driver.elementByXPath("(//XCUIElementTypeOther[@name=\"Enter new task…\"])[1]");
+  await el5.click();
+  await el5.sendKeys("Test");
+  let el6 = await driver.elementByXPath("//XCUIElementTypeStaticText[@name=\"\"]");
+  await el6.click();
 });
 
 test('Removing task', async () => {
+    // await (new wd.TouchAction(driver))
+    //  .tap({x: 120, y: 93})
+    //  .perform()
+    // await driver.quit();
     await (new wd.TouchAction(driver))
-     .tap({x: 120, y: 93})
-     .perform()
-    await driver.quit();
+    .tap({x: 296, y: 250})
+    .perform()
+      
+  await (new wd.TouchAction(driver))
+    .tap({x: 148, y: 570})
+    .perform()
+      
+  // await driver.quit();  
+    
+
 });
 
 // main().catch(console.log);

@@ -25,8 +25,8 @@ export default class ToDoApp extends Component {
   }
 
   componentDidMount() {
-    this._wipeTodos();
-    this._loadMockData("00");
+    //this._wipeTodos();
+    this._loadMockData("500");
     this._updateTodos();
   }
 
@@ -48,7 +48,7 @@ export default class ToDoApp extends Component {
 }
 
   async _updateTodos() {
-    t1 = performance.now();
+    // t1 = performance.now();
 
     let response = await AsyncStorage.getItem('Tasks');
     let tasks = await JSON.parse(response) || [];
@@ -57,12 +57,12 @@ export default class ToDoApp extends Component {
       tasks
     });
 
-    t2 = performance.now();
-    this.state.updateTimes.push(t2-t1);
+    // t2 = performance.now();
+    // this.state.updateTimes.push(t2-t1);
 
-    console.log("updateTimes: " + this.state.updateTimes)
-    console.log("addTimes: " + this.state.addTimes)
-    console.log("deleteTimes: " + this.state.deleteTimes)
+    // console.log("updateTimes: " + this.state.updateTimes)
+    // console.log("addTimes: " + this.state.addTimes)
+    // console.log("deleteTimes: " + this.state.deleteTimes)
 
     //this.saveCSV(this.state.updateTimes, "updateTimes")
   };
@@ -103,7 +103,7 @@ export default class ToDoApp extends Component {
   }
 
   addToDo() {
-    t1 = performance.now();
+    // t1 = performance.now();
 
     let notEmpty = this.state.text.trim().length > 0;
 
@@ -117,12 +117,12 @@ export default class ToDoApp extends Component {
     setTimeout(() => this.flatlist.scrollToEnd(), 200)
     this.changeTextInput("");
 
-    t2 = performance.now();
-    this.state.addTimes.push(t2-t1);
+    // t2 = performance.now();
+    // this.state.addTimes.push(t2-t1);
   };
 
   deleteToDo(index) {
-    t1 = performance.now();
+    // t1 = performance.now();
 
     var array = this.state.tasks;
     array.splice(index, 1);
@@ -130,10 +130,12 @@ export default class ToDoApp extends Component {
 
     this._saveTodos(this.state.tasks);
     this._updateTodos();
-    console.timeEnd('deleteTodo');
+    
+    
+    //console.timeEnd('deleteTodo');
 
-    t2 = performance.now();
-    this.state.deleteTimes.push(t2-t1);
+    // t2 = performance.now();
+    // this.state.deleteTimes.push(t2-t1);
   };
 
   changeTextInput(text) {
@@ -146,7 +148,7 @@ export default class ToDoApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header centerComponent={{ text: 'TodoApp', style: { color: '#fff', fontSize: 18 } }} />
+        <Header onPress={() =>  setTimeout(() => this.flatlist.scrollTo({x: 0, y: 0, animated: true}), 200)} centerComponent={{ text: 'TodoApp', style: { color: '#fff', fontSize: 18 } }} />
         {/* <Icon name="paper-plane" size={30} color="black" onPress={() => this._debugTodos()} />
         <Icon name="paper-plane" size={30} color="red" onPress={() => this._debugTodosState()} /> */}
         <FlatList

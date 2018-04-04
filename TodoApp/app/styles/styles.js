@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
   },
   list_row: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: 'space-between'
   },
   item: {
     padding: 10,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   button_del: {
-    justifyContent: 'flex-end'
+    padding:10
   },
   row: {
     flexDirection: 'row',
