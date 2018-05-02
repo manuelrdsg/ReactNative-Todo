@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android-linux": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",
+    "test": "jest",
+    "sonar": "sonar-scanner   -Dsonar.projectKey=tfg-reactnative   -Dsonar.organization=manuelrdsg-github   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=   -Dsonar.exclusions='node_modules/**/*, ios/**/*, android/**/*' -Dsonar.java.binaries=./node_modules/"
   },
   "dependencies": {
     "react": "^16.3.0-alpha.1",

@@ -1,7 +1,7 @@
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 const wd = require('wd');
 const driver = wd.promiseChainRemote("http://localhost:4723/wd/hub");
-const caps = {"platformName":"iOS","platformVersion":"11.2","deviceName":"iPhone Simulator","app":"/Users/manuelrdsg/Documents/Workspaces/React_Native/ReactNative-Todo-FB/TodoApp/ios/build/Build/Products/Debug-iphonesimulator/TodoApp.app","automationName":"XCUITest"};
+const caps = {"platformName":"iOS","platformVersion":"11.3","deviceName":"iPhone Simulator","app":"/Users/manuelrdsg/Documents/Workspaces/React_Native/ReactNative-Todo-FB/TodoApp/ios/build/Build/Products/Debug-iphonesimulator/TodoApp.app","automationName":"XCUITest"};
 
 
 beforeAll(async () => {
