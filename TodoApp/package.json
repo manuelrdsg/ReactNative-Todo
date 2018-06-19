@@ -6,9 +6,10 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android-linux": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android",
     "test": "jest",
-    "sonar": "sonar-scanner   -Dsonar.projectKey=tfg-reactnative   -Dsonar.organization=manuelrdsg-github   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=   -Dsonar.exclusions='node_modules/**/*, ios/**/*, android/**/*' -Dsonar.java.binaries=./node_modules/"
+    "sonar": "sonar-scanner   -Dsonar.projectKey=tfg-reactnative   -Dsonar.organization=manuelrdsg-github   -Dsonar.sources=.   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=e8be6534a0fff23836cf86e73946ed9f501a9e14   -Dsonar.exclusions='node_modules/**/*, ios/**/*, android/**/*' -Dsonar.java.binaries=./node_modules/"
   },
   "dependencies": {
+    "performance-now": "^2.1.0",
     "react": "^16.3.0-alpha.1",
     "react-native": "0.54.2",
     "react-native-elements": "^0.19.0",
