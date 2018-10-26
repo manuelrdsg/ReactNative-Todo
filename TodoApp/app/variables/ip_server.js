@@ -1,0 +1,1 @@
+var ipServer = 'http://206.189.124.252:8080/test'
