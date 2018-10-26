@@ -1,29 +1,31 @@
 import React, { Component } from "react";
+
 import {
   AppRegistry,
   Text,
   View,
-  StyleSheet,
   FlatList,
   KeyboardAvoidingView,
   AsyncStorage,
-  ActivityIndicator,
-  TextInput
+  ActivityIndicator
 } from "react-native";
+
 import {
-  Button,
   FormInput,
-  Header,
-  ListItem,
-  List
+  Header
 } from "react-native-elements";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./app/styles/styles";
-import ipServer from "./app/variables";
 import MyListItem from "./app/ListItem"
 import now from 'performance-now';
+import LIST_SIZE from './app/enums/list_size_enum'
+import ACTIONS from './app/enums/call_enum'
+import ipServer from './app/variables/ip_server'
 
-const TASK_NUMBER = '1000';
+// TODO: Review setStates
+
+const TASK_NUMBER = LIST_SIZE.small;
 
 export default class TodoApp extends Component {
   constructor(props) {
@@ -63,36 +65,46 @@ export default class TodoApp extends Component {
     };
   }
 
-
   componentDidMount() {
-    this._loadMockData(TASK_NUMBER);
+    this._loadMockData();   // When the component mount, the application loads a JSON file with a set of tasks
   }
 
-  _loadMockData(file) {
+  _loadMockData() {
 
-    t1 = now();
+    let t1 = now();
+    let jsonfile;
 
-    var jsonfile;
+    switch(TASK_NUMBER) {
+      case LIST_SIZE.small: {
+        jsonfile = require("./db/MOCK_DATA_100.json");
+        break;
+      }
 
-    if (file === "100") jsonfile = require("./db/MOCK_DATA_100.json");
-    else if (file === "500") jsonfile = require("./db/MOCK_DATA_500.json");
-    else if (file === "1000") jsonfile = require("./db/MOCK_DATA_1000.json");
-    else return;
+      case LIST_SIZE.medium: {
+        jsonfile = require("./db/MOCK_DATA_500.json");
+        break;
+      }
 
-    console.log("calling savetodos")
+      case LIST_SIZE.big: {
+        jsonfile = require("./db/MOCK_DATA_1000.json");
+        break
+      }
+
+      default: return;
+    }
+
     this._saveTodos(jsonfile, "json");
-    
-    console.log("calling updatetodos")
     this._updateTodos("json");
 
-    var t2 = now();
+    let t2 = now();
 
-    this.state.Times.loadJson.loadJson.push(t2 - t1);
-    console.log("LoadJson: ", this.state.Times.loadJson.loadJson.length);
+    this.setState({
+      Times: this.state.Times.loadJson.loadJson.push(t2-t1)
+    })
   }
 
-  async _updateTodos(call) {
-    var t1 = now();
+  async _updateTodos(action) {
+    let t1 = now()
 
     AsyncStorage.getItem("Tasks")
       .then( (tasks) => {
@@ -104,75 +116,111 @@ export default class TodoApp extends Component {
         console.log(error);
       });
 
-    this.setState({ refreshing: false });
+    this.setState({ 
+      refreshing: !this.state.refreshing 
+    })
 
-    var t2 = now();
+    let t2 = now();
 
     console.log("_updateTodos");
 
-    if (call == "add") {
-      this.state.Times.addTask.updateTodos.push(t2 - t1);
-      console.log(
-        "Add._updateTodos: ",
-        this.state.Times.addTask.updateTodos.length
-      );
-    } else if (call == "remove") {
-      this.state.Times.removeTask.updateTodos.push(t2 - t1);
-      console.log(
-        "Remove._updateTodos: ",
-        this.state.Times.removeTask.updateTodos.length
-      );
-    } else if (call == "json") {
-      this.state.Times.loadJson.updateTodos.push(t2 - t1);
-      console.log(
-        "Json._updateTodos: ",
-        this.state.Times.loadJson.updateTodos.length
-      );
-    } else {
-      // this.state.Times.getTasks.push(t2 - t1);
-      // console.log("_updateTodos: ", this.state.Times.getTasks.length);
+    switch (action) {
+
+      case ACTIONS.add_task: {
+        this.setState({
+          Times: this.state.Times.addTask.updateTodos.push(t2 - t1)
+        })
+        console.log(
+          "Add._updateTodos: ",
+          this.state.Times.addTask.updateTodos.length
+        );
+        break;
+      }
+
+      case ACTIONS.remove_task: {
+        this.setState({
+          Times: this.state.Times.removeTask.updateTodos.push(t2 - t1)
+        })
+        console.log(
+          "Remove._updateTodos: ",
+          this.state.Times.removeTask.updateTodos.length
+        );
+        break;
+      }
+
+      case ACTIONS.load_json: {
+        this.setState({
+          Times: this.state.Times.loadJson.updateTodos.push(t2 - t1)
+        })
+        console.log(
+          "Json._updateTodos: ",
+          this.state.Times.loadJson.updateTodos.length
+        );
+        break;
+      }
+
+      default:
     }
+
   }
 
   async _wipeTodos() {
     await AsyncStorage.clear();
   }
 
-  async _saveTodos(tasks, call) {
-    t1 = now();
+  async _saveTodos(tasks, action) {
+    let t1 = now();
 
     AsyncStorage.setItem("Tasks", JSON.stringify(tasks))
       .catch( function(error){
         console.log(error);
       });
 
-    var t2 = now();
+    let t2 = now();
 
     console.log("_saveTodos")
 
-    if (call == "add") {
-      this.state.Times.addTask.saveTodos.push(t2 - t1);
+  switch (action) {
+
+    case ACTIONS.add_task: {
+      this.setState({
+        Times: this.state.Times.addTask.saveTodos.push(t2 - t1)
+      })
       console.log(
         "Add._saveTodos: ",
         this.state.Times.addTask.saveTodos.length
       );
-    } else if (call == "remove") {
-      this.state.Times.removeTask.saveTodos.push(t2 - t1);
+      break;
+    }
+
+    case ACTIONS.remove_task: {
+      this.setState({
+        Times: this.state.Times.removeTask.saveTodos.push(t2 - t1)
+      })
       console.log(
         "Remove._saveTodos: ",
         this.state.Times.removeTask.saveTodos.length
-      );
-    } else if (call == "json") {
-      this.state.Times.loadJson.saveTodos.push(t2 - t1);
+      )
+      break;
+    }
+
+    case ACTIONS.load_json: {
+      this.setState({
+        Times: this.state.Times.loadJson.saveTodos.push(t2 - t1)
+      })
       console.log(
         "Json._saveTodos: ",
         this.state.Times.loadJson.saveTodos.length
       );
+      break;
     }
+
+    default:
   }
+}
 
   addToDo = () => {
-    var t1 = now();
+    let t1 = now();
 
     let notEmpty = this.state.text.trim().length > 0;
 
@@ -188,32 +236,37 @@ export default class TodoApp extends Component {
     setTimeout(() => this.flatlist.scrollToEnd(), 200);
     this.changeTextInput("");
 
-    var t2 = now();
+    let t2 = now();
 
     if (notEmpty) {
-      this.state.Times.addTask.addTodo.push(t2 - t1);
+      this.setState({
+        Times: this.state.Times.addTask.addTodo.push(t2 - t1)
+      })
       console.log("AddTask: ", this.state.Times.addTask.addTodo.length);
     }
   };
 
   deleteToDo = (index) => () => {
-    var t1 = now();
+    let t1 = now();
 
-    var array = this.state.tasks;
-    array.splice(index, 1);
-    this.setState({ tasks: array });
+    let tasks_new = this.state.tasks;
+    tasks_new.splice(index, 1);
+    this.setState({ tasks: tasks_new });
 
-    this._saveTodos(this.state.tasks, "remove");
-    this._updateTodos("remove");
+    this._saveTodos(this.state.tasks, ACTIONS.remove_task);
+    this._updateTodos(ACTIONS.remove_task);
 
-    var t2 = now();
-    this.state.Times.removeTask.removeTodo.push(t2 - t1);
+    let t2 = now();
+
+    this.setState({
+      Times: this.state.Times.remove_task.removeTodo.push(t2 - t1)
+    })
     console.log("RemoveTask: ", this.state.Times.removeTask.removeTodo.length);
   };
 
   changeTextInput(text) {
     this.setState({
-      text
+      text: ""
     });
     this.input.blur();
     this.input.clearText();
@@ -264,7 +317,7 @@ export default class TodoApp extends Component {
     console.log("GetTasks() Average", this.state.Times.getTasksAverage);
     console.log("LoadJSON() Average", this.state.Times.loadJsonTotalAverage);
 
-    fetch('http://206.189.124.252:8080/test', {
+    fetch(ipServer, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -281,18 +334,16 @@ export default class TodoApp extends Component {
   };
 
   handleRefresh = () => {
-
-    var t1 = now();
-    console.log(t1);
+    let t1 = now();
     this.setState({ refreshing: true }, () => {
       this._updateTodos();
     });
-    var t2 = now();
-    console.log(t2);
+    let t2 = now();
 
-    this.state.Times.getTasks.push(t2 - t1);
+    this.setState({
+      Times: this.state.Times.getTasks.push(t2 - t1)
+    })
     console.log("_updateTodos: ", this.state.Times.getTasks.length);
-
   };
 
   handleTopScroll = () => {
