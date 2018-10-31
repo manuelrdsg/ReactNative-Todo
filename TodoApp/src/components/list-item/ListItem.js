@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { ListItem } from 'react-native-elements';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Text } from 'react-native';
-import styles from "./styles/styles";
-import TodoApp from '../App';
+import styles from "./ListItem.Styles";
 
 
 
@@ -34,6 +33,6 @@ export default class MyListItem extends React.PureComponent {
           />
         }
       />
-       )
+      )
     }
   }

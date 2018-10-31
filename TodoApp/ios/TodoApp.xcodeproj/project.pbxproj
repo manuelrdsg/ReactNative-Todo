@@ -49,6 +49,7 @@
 		97B4633395674C0296D68483 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7811EB6173437AA3DE0A0F /* Zocial.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		DF88E068473E4DA1B7A8F343 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5F77BBA6F664F4786FF1676 /* SimpleLineIcons.ttf */; };
+		EA889A8A2157B46100858FFC /* libfishhook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6841FA4F8DC00B85C8A /* libfishhook.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +390,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA889A8A2157B46100858FFC /* libfishhook.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
