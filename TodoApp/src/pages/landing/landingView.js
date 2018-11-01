@@ -99,8 +99,11 @@ export class landingView extends Component {
 
         var t2 = now();
 
-        this.state.Times.loadJson.loadJson.push(t2 - t1);
-        console.log("LoadJson: ", this.state.Times.loadJson.loadJson.length);
+        let timesCopy = this.state.Times
+        timesCopy.loadJson.loadJson = [...timesCopy.loadJson.loadJson, t2-t1]
+        this.setState({
+            Times: timesCopy
+        })
     }
 
     async _updateTodos(call) {
@@ -120,32 +123,29 @@ export class landingView extends Component {
 
         var t2 = now();
 
-        console.log("_updateTodos");
-
-
         switch(call) {
             case ACTIONS.add_task: {
-                this.state.Times.addTask.updateTodos.push(t2 - t1);
-                console.log(
-                    "Add._updateTodos: ",
-                    this.state.Times.addTask.updateTodos.length
-                );
+                let timesCopy = this.state.Times
+                timesCopy.addTask.updateTodos = [...timesCopy.addTask.updateTodos, t2-t1]
+                this.setState({
+                    Times: timesCopy
+                })
                 break;
             }
             case ACTIONS.remove_task: {
-                this.state.Times.removeTask.updateTodos.push(t2 - t1);
-                console.log(
-                    "Remove._updateTodos: ",
-                    this.state.Times.removeTask.updateTodos.length
-                );
+                let timesCopy = this.state.Times
+                timesCopy.removeTask.updateTodos = [...timesCopy.removeTask.updateTodos, t2-t1]
+                this.setState({
+                    Times: timesCopy
+                })
                 break;
             }
             case ACTIONS.load_json: {
-                this.state.Times.loadJson.updateTodos.push(t2 - t1);
-                console.log(
-                    "Json._updateTodos: ",
-                    this.state.Times.loadJson.updateTodos.length
-                );
+                let timesCopy = this.state.Times
+                timesCopy.loadJson.updateTodos = [...timesCopy.loadJson.updateTodos, t2-t1]
+                this.setState({
+                    Times: timesCopy
+                })
                 break;
             }
             default:
@@ -166,31 +166,29 @@ export class landingView extends Component {
 
         var t2 = now();
 
-        console.log("_saveTodos")
-
         switch(call) {
             case ACTIONS.add_task: {
-                this.state.Times.addTask.saveTodos.push(t2 - t1);
-                console.log(
-                    "Add._saveTodos: ",
-                    this.state.Times.addTask.saveTodos.length
-                );
+                let timesCopy = this.state.Times
+                timesCopy.addTask.saveTodos = [...timesCopy.addTask.saveTodos, t2-t1]
+                this.setState({
+                    Times: timesCopy
+                })
                 break;
             }
             case ACTIONS.remove_task: {
-                this.state.Times.removeTask.saveTodos.push(t2 - t1);
-                console.log(
-                    "Remove._saveTodos: ",
-                    this.state.Times.removeTask.saveTodos.length
-                );
+                let timesCopy = this.state.Times
+                timesCopy.removeTask.saveTodos = [...timesCopy.removeTask.saveTodos, t2-t1]
+                this.setState({
+                    Times: timesCopy
+                })
                 break;
             }
             case ACTIONS.load_json: {
-                this.state.Times.loadJson.saveTodos.push(t2 - t1);
-                console.log(
-                    "Json._saveTodos: ",
-                    this.state.Times.loadJson.saveTodos.length
-                );
+                let timesCopy = this.state.Times
+                timesCopy.loadJson.saveTodos = [...timesCopy.loadJson.saveTodos, t2-t1]
+                this.setState({
+                    Times: timesCopy
+                })
                 break;
             }
             default:
@@ -217,8 +215,12 @@ export class landingView extends Component {
         var t2 = now();
 
         if (notEmpty) {
-            this.state.Times.addTask.addTodo.push(t2 - t1);
-            console.log("AddTask: ", this.state.Times.addTask.addTodo.length);
+
+            let timesCopy = this.state.Times
+            timesCopy.addTask.addTodo = [...timesCopy.addTask.addTodo, t2-t1]
+            this.setState({
+                Times: timesCopy
+            })
         }
     };
 
@@ -233,8 +235,12 @@ export class landingView extends Component {
         this._updateTodos("remove");
 
         var t2 = now();
-        this.state.Times.removeTask.removeTodo.push(t2 - t1);
-        console.log("RemoveTask: ", this.state.Times.removeTask.removeTodo.length);
+
+        let timesCopy = this.state.Times
+        timesCopy.removeTask.removeTodo = [...timesCopy.removeTask.removeTodo, t2-t1]
+        this.setState({
+            Times: timesCopy
+        })
     };
 
     changeTextInput(text) {
@@ -245,7 +251,6 @@ export class landingView extends Component {
 
     sendTimes = () => {
         for (i = 0; i < 100; i++) {
-        console.log(i);
         this.state.Times.loadJson.Total[i] =
             this.state.Times.loadJson.updateTodos[i] +
             this.state.Times.loadJson.saveTodos[i] +
@@ -307,15 +312,17 @@ export class landingView extends Component {
     handleRefresh = () => {
 
         var t1 = now();
-        console.log(t1);
         this.setState({ refreshing: true }, () => {
         this._updateTodos();
         });
         var t2 = now();
-        console.log(t2);
 
-        this.state.Times.getTasks.push(t2 - t1);
-        console.log("_updateTodos: ", this.state.Times.getTasks.length);
+
+        timesCopy = this.state.Times
+        timesCopy.getTasks = [...timesCopy.getTasks, t2-t1]
+        this.setState({
+            Times: timesCopy
+        })
 
     };
 
