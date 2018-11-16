@@ -318,7 +318,7 @@ export class landingView extends Component {
         var t2 = now();
 
 
-        timesCopy = this.state.Times
+        let timesCopy = this.state.Times
         timesCopy.getTasks = [...timesCopy.getTasks, t2-t1]
         this.setState({
             Times: timesCopy
