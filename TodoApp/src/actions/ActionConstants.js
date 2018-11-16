@@ -1,0 +1,5 @@
+export const LIST_ADD_TASK = "LIST_ADD_TASK"
+export const LIST_REMOVE_TASK = "LIST_REMOVE_TASK"
+export const LIST_GET_TASKS = "LIST_GET_TASKS"
+export const LIST_LOAD_TASKS = "LIST_LOAD_TASKS"
+export const LIST_SEND_DATA = "LIST_SEND_DATA"
