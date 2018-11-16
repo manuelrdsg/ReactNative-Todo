@@ -1,7 +1,7 @@
 organization=manuelrdsg-github
-projectKey=tfg-reactnative
+projectKey=tfg-reactnative-single
 serverUrl=https://sonarcloud.io
-serverVersion=7.1.1.10702
-dashboardUrl=https://sonarcloud.io/dashboard/index/tfg-reactnative
-ceTaskId=AWMgtjNFOnVewt-wi1hC
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWMgtjNFOnVewt-wi1hC
+serverVersion=7.3.0.14089
+dashboardUrl=https://sonarcloud.io/dashboard?id=tfg-reactnative-single
+ceTaskId=AWRch3K-xO30rQQzdB7u
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWRch3K-xO30rQQzdB7u
