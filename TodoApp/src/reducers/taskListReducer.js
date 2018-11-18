@@ -45,6 +45,8 @@ const TaskListReducer = (state = initialState, action) => {
                 tasks: jsonfile
             }
         }
+        default:
+            return state;
     }
 };
 

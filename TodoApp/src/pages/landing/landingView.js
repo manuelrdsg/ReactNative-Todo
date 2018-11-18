@@ -365,9 +365,11 @@ export class landingView extends Component {
                         style={styles.text_imput}
                         placeholder="Enter new task..."
                         maxLength={20}
-                        onChangeText={text => this.setState({ text })}
-                        onSubmitEditing={this.addToDo}
-                        value={this.state.text}
+                        //onChangeText={text => this.setState({ text })}
+                        onSubmitEditing={() => {
+                            console.log(this.props)
+                        }}
+                        //value={this.state.text}
                     />
                     <Icon
                         name="paper-plane"
