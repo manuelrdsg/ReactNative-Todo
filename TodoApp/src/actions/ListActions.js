@@ -1,4 +1,11 @@
-import { LIST_ADD_TASK, LIST_REMOVE_TASK, LIST_GET_TASKS, LIST_LOAD_TASKS } from './ActionConstants'
+import { LIST_ADD_TASK, LIST_REMOVE_TASK, LIST_GET_TASKS, LIST_LOAD_TASKS, LIST_CHANGE_TEXT } from './ActionConstants'
+
+export const changeText = (params) => {
+    return {
+        type: LIST_CHANGE_TEXT,
+        params: params
+    }
+}
 
 export const addTask = (params) => {
     return {

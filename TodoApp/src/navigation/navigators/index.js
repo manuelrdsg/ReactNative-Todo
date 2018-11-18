@@ -1,4 +1,4 @@
-import { landingView } from "../../pages/landing/landingView"
+import  landingView  from "../../pages/landing"
 import { createStackNavigator } from "react-navigation"
 
 export const RootNav = createStackNavigator({
